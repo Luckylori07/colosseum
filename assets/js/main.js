@@ -1,0 +1,190 @@
+/* Colosseum Azzate - comportamento della pagina. Nessuna dipendenza, nessun tracking. */
+(function () {
+  'use strict';
+
+  var doc = document;
+  var root = doc.documentElement;
+  var body = doc.body;
+
+  /* ---------------------------------------------------------------------
+     0. Modalità demo: se data-demo non è "on" tolgo anche noindex e prefisso titolo
+        (il modo completo di pubblicare è go-live.sh, vedi README)
+     ------------------------------------------------------------------ */
+  if (body.getAttribute('data-demo') !== 'on') {
+    var robots = doc.getElementById('demo-robots');
+    if (robots && robots.parentNode) robots.parentNode.removeChild(robots);
+    doc.title = doc.title.replace(/^\[DEMO\]\s*/, '');
+  }
+
+  /* ---------------------------------------------------------------------
+     1. Altezza della barra fissa (demo + header) per gli scroll alle ancore
+     ------------------------------------------------------------------ */
+  var top = doc.querySelector('.top');
+  function setTopHeight() {
+    if (top) root.style.setProperty('--top-h', top.offsetHeight + 'px');
+  }
+  setTopHeight();
+  window.addEventListener('resize', setTopHeight);
+  if (window.ResizeObserver && top) new ResizeObserver(setTopHeight).observe(top);
+
+  var style = doc.createElement('style');
+  style.textContent = '[id]{scroll-margin-top:calc(var(--top-h) + 8px)}';
+  doc.head.appendChild(style);
+
+  /* ---------------------------------------------------------------------
+     2. Menu mobile
+     ------------------------------------------------------------------ */
+  var burger = doc.querySelector('.header__burger');
+  var nav = doc.getElementById('menu');
+  function setMenu(open) {
+    if (!burger || !nav) return;
+    nav.classList.toggle('is-open', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    burger.setAttribute('aria-label', open ? 'Chiudi il menu' : 'Apri il menu');
+    burger.querySelector('use').setAttribute('href', open ? '#i-close' : '#i-menu');
+  }
+  if (burger && nav) {
+    burger.addEventListener('click', function () {
+      setMenu(burger.getAttribute('aria-expanded') !== 'true');
+    });
+    nav.addEventListener('click', function (e) {
+      if (e.target.closest('a')) setMenu(false);
+    });
+    doc.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+        setMenu(false);
+        burger.focus();
+      }
+    });
+  }
+
+  /* ---------------------------------------------------------------------
+     3. Aperto ora / Chiuso (fuso Europe/Rome)
+        Orari: Lun-Ven 9:00-21:30, Sab 9:00-17:00, Dom 9:30-12:30
+     ------------------------------------------------------------------ */
+  var SCHEDULE = {            // giorno (0 = domenica) -> [apertura, chiusura] in minuti dalla mezzanotte
+    0: [9 * 60 + 30, 12 * 60 + 30],
+    1: [9 * 60, 21 * 60 + 30],
+    2: [9 * 60, 21 * 60 + 30],
+    3: [9 * 60, 21 * 60 + 30],
+    4: [9 * 60, 21 * 60 + 30],
+    5: [9 * 60, 21 * 60 + 30],
+    6: [9 * 60, 17 * 60]
+  };
+  var WEEKDAY_INDEX = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+
+  function fmt(min) {
+    var h = Math.floor(min / 60), m = min % 60;
+    return h + ':' + (m < 10 ? '0' : '') + m;
+  }
+
+  function romeNow(date) {
+    var parts = new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Europe/Rome', weekday: 'short', hour: '2-digit', minute: '2-digit', hourCycle: 'h23'
+    }).formatToParts(date);
+    var out = {};
+    parts.forEach(function (p) { out[p.type] = p.value; });
+    return { day: WEEKDAY_INDEX[out.weekday], minutes: parseInt(out.hour, 10) * 60 + parseInt(out.minute, 10) };
+  }
+
+  function getStatus(date) {
+    var now = romeNow(date);
+    var today = SCHEDULE[now.day];
+    if (now.minutes >= today[0] && now.minutes < today[1]) {
+      return { open: true, label: 'Aperto ora', detail: 'Fino alle ' + fmt(today[1]), day: now.day };
+    }
+    if (now.minutes < today[0]) {
+      return { open: false, label: 'Chiuso', detail: 'Apre oggi alle ' + fmt(today[0]), day: now.day };
+    }
+    var next = (now.day + 1) % 7;
+    return { open: false, label: 'Chiuso', detail: 'Riapre domani alle ' + fmt(SCHEDULE[next][0]), day: now.day };
+  }
+
+  function renderStatus() {
+    var s;
+    try { s = getStatus(new Date()); } catch (err) { return; }
+    doc.querySelectorAll('[data-status]').forEach(function (el) {
+      el.classList.toggle('is-open', s.open);
+      var l = el.querySelector('[data-status-label]');
+      var d = el.querySelector('[data-status-detail]');
+      if (l) l.textContent = s.label;
+      if (d) d.textContent = s.detail;
+    });
+    doc.querySelectorAll('.hours__item').forEach(function (li) {
+      var days = li.getAttribute('data-days').split(',').map(Number);
+      var isToday = days.indexOf(s.day) !== -1;
+      li.classList.toggle('is-today', isToday);
+      if (isToday) li.setAttribute('aria-current', 'date'); else li.removeAttribute('aria-current');
+    });
+  }
+  renderStatus();
+  setInterval(renderStatus, 60 * 1000);
+
+  /* ---------------------------------------------------------------------
+     4. Lightbox accessibile (dialog nativo: focus intrappolato, ESC chiude, focus restituito)
+     ------------------------------------------------------------------ */
+  var dlg = doc.getElementById('lightbox');
+  var tiles = Array.prototype.slice.call(doc.querySelectorAll('.gallery button[data-full]'));
+  if (dlg && tiles.length && typeof dlg.showModal === 'function') {
+    var lbImg = dlg.querySelector('.lightbox__img');
+    var lbCap = dlg.querySelector('.lightbox__cap');
+    var lbCount = dlg.querySelector('.lightbox__count');
+    var current = 0;
+
+    var show = function (i) {
+      current = (i + tiles.length) % tiles.length;
+      var t = tiles[current];
+      lbImg.src = t.getAttribute('data-full');
+      lbImg.width = parseInt(t.getAttribute('data-w'), 10);
+      lbImg.height = parseInt(t.getAttribute('data-h'), 10);
+      lbImg.alt = t.getAttribute('data-caption');
+      lbCap.textContent = t.getAttribute('data-caption');
+      lbCount.textContent = 'Foto ' + (current + 1) + ' di ' + tiles.length;
+    };
+    var open = function (i) {
+      show(i);
+      dlg.showModal();
+      root.classList.add('no-scroll');
+    };
+
+    tiles.forEach(function (t, i) {
+      t.addEventListener('click', function () { open(i); });
+    });
+    dlg.querySelector('.lightbox__close').addEventListener('click', function () { dlg.close(); });
+    dlg.querySelector('.lightbox__prev').addEventListener('click', function () { show(current - 1); });
+    dlg.querySelector('.lightbox__next').addEventListener('click', function () { show(current + 1); });
+    dlg.addEventListener('close', function () { root.classList.remove('no-scroll'); });
+    dlg.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); show(current - 1); }
+      else if (e.key === 'ArrowRight') { e.preventDefault(); show(current + 1); }
+    });
+    // clic sullo sfondo (fuori da immagine e pulsanti) chiude
+    dlg.addEventListener('click', function (e) {
+      if (e.target === dlg || e.target.classList.contains('lightbox__inner')) dlg.close();
+    });
+  } else {
+    // senza <dialog> le foto si aprono come immagini normali
+    tiles.forEach(function (t) {
+      t.addEventListener('click', function () { window.open(t.getAttribute('data-full'), '_blank', 'noopener'); });
+    });
+  }
+
+  /* ---------------------------------------------------------------------
+     5. Reveal sobrio allo scroll (solo gruppi numerati; disattivo con prefers-reduced-motion)
+     ------------------------------------------------------------------ */
+  var reveals = doc.querySelectorAll('[data-reveal]');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reveals.length && 'IntersectionObserver' in window && !reduce) {
+    reveals.forEach(function (group) {
+      Array.prototype.forEach.call(group.children, function (child, i) { child.style.setProperty('--n', i); });
+    });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting || en.boundingClientRect.top < 0) { en.target.classList.add('is-in'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.15 });
+    reveals.forEach(function (g) { io.observe(g); });
+  } else {
+    reveals.forEach(function (g) { g.classList.add('is-in'); });
+  }
+})();

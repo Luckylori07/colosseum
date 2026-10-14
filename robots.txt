@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# Il noindex della demo è nel meta robots delle pagine (vedi README: go-live.sh lo rimuove).
+# Aggiorna il dominio quando pubblichi il sito definitivo.
+Sitemap: https://www.colosseumazzate.it/sitemap.xml
