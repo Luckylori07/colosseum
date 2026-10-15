@@ -140,7 +140,10 @@ body[data-demo="on"] .demo-only { display: block; }
 .demo-bar a:focus-visible { outline-color: #fff; }
 
 .header { background: var(--green); color: #fff; border-bottom: 1px solid rgba(255, 255, 255, .22); --focus: #fff; }
-.header .btn--primary { --btn-bg: var(--pop); --btn-fg: var(--ink); --btn-hover-bg: #fff; --btn-hover-fg: var(--green); }
+.header__social { display: flex; align-items: center; gap: 2px; }
+.header__social a { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; color: #fff; border-radius: var(--radius); transition: color .15s; }
+.header__social a:hover { color: var(--pop); }
+.header__social .ico { width: 22px; height: 22px; }
 .header__row { display: flex; align-items: center; gap: 12px; min-height: 68px; }
 .header__logo { display: block; margin-right: auto; line-height: 0; }
 .header__logo img { height: 46px; width: auto; }
@@ -280,8 +283,8 @@ html:not(.js) .header__burger { display: none; }
 .pagehead--flush { padding-bottom: clamp(32px, 4vw, 56px); }
 .pagehead--flush .sec__head { margin-bottom: 0; }
 .outside { overflow: hidden; }
-.outside img { width: 100%; aspect-ratio: 2 / 1; object-fit: cover; object-position: 24% 60%; }
-@media (min-width: 640px) { .outside img { aspect-ratio: 3 / 1; object-position: center 60%; } }
+.outside img { width: 100%; aspect-ratio: 5 / 2; object-fit: cover; object-position: 24% 60%; }
+@media (min-width: 640px) { .outside img { aspect-ratio: 1797 / 401; object-position: center; } }  /* proporzioni originali: nessun ritaglio né ingrandimento */
 .where { display: grid; gap: 36px; }
 .where__block { display: grid; gap: 14px; align-content: start; justify-items: start; }
 .where__block h2 { font-size: 1.75rem; }
@@ -410,7 +413,7 @@ div.hub__item { align-content: start; }
   .nav__list a { padding: 8px 0; font-size: 1rem; border: 0; border-bottom: 3px solid transparent; }
   .nav__list a:hover, .nav__list a[aria-current="page"] { border-bottom-color: var(--pop); }
   .header__logo { margin-right: 0; }
-  .header__call { margin-left: auto; }
+  .header__social { margin-left: auto; }
   html:not(.js) .nav { width: auto; order: 0; }
 
   .hero__grid { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 56px; }
