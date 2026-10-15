@@ -36,7 +36,7 @@ Header, footer e barra DEMO sono **ripetuti identici in ogni pagina** (nessun bu
 | **Prezzi** | in `abbonamenti.html` cerca `data-price-slot`: sostituisci "Chiedi il prezzo in reception" con la cifra. Per gli ingressi, aggiungi il prezzo nel blocco `.entries__list` |
 | **Corsi** | blocco `.corsi` in `la-palestra.html` e FAQ "Ci sono corsi?": ora dice "Chiedi in reception i corsi attivi" |
 | Social | non inseriti (vedi report): aggiungi i link nella colonna "Contatti e orari" del footer |
-| Colori | variabili in `:root` di `style.css`. Sfondo sempre scuro (`--ink`, `--ink-2`). `--green: #004723` è il verde del logo (footer e fasce); `--lit: #3bcb83` è la stessa tonalità più chiara, usata per CTA, numeri e linee su fondo scuro |
+| Colori | variabili in `:root` di `style.css`. Sfondo sempre scuro (`--ink`, `--ink-2`). `--green: #004723` è il verde del logo (footer, marquee, card "Oggi"); `--sand: #e8d5a6` è l'unico accento (travertino) per CTA, numeri e linee |
 | Filtro sulle foto | classe `.tone` in `style.css` (scurisce e desatura leggermente + velo verde-grafite). Per una foto senza filtro togli `tone` dall'elemento. Il lightbox mostra la foto originale |
 
 ## Aggiungere o cambiare foto
