@@ -35,15 +35,15 @@ Header, footer e barra DEMO sono **ripetuti identici in ogni pagina** (nessun bu
 | **Prezzi** | in `abbonamenti.html` cerca `data-price-slot`: sostituisci "Chiedi il prezzo in reception" con la cifra. Per gli ingressi, aggiungi il prezzo nel blocco `.entries__list` |
 | **Corsi** | blocco `.corsi` in `la-palestra.html` e FAQ "Ci sono corsi?": ora dice "Chiedi in reception i corsi attivi" |
 | Social | Instagram `instagram.com/colosseum_azzate` e Facebook `facebook.com/colosseumazzate`: cerca `instagram.com` e `facebook.com` nei file `.html` (footer, home, `dove-siamo.html`, `come-iniziare.html`, `faq.html`, JSON-LD `sameAs`) |
-| Colori | variabili in `:root` di `style.css`. Sfondo scuro (`--ink`, `--ink-2`); `--green: #004723` è il verde del logo (header, footer, fasce); `--pop: #ffa63d` è l'unico accento (ambra) su fondo scuro/verde. La sezione "La palestra" usa la superficie chiara `.s-white` |
-| Filtro sulle foto | classe `.tone` in `style.css` (scurisce e desatura leggermente + velo verde-grafite). Per una foto senza filtro togli `tone` dall'elemento; in "La palestra" le foto sono senza filtro |
+| Colori | variabili in `:root` di `style.css`. Sfondo scuro (`--ink`, `--ink-2`); `--green: #004723` è il verde del logo (header, footer, fasce, hover delle card); `--pop: #ffa63d` è l'unico accento (ambra) |
+| Filtro sulle foto | solo la foto dell'esterno in `dove-siamo.html` usa la classe `.tone` (leggera scurita + velo verde-grafite); le foto della sala sono senza filtro |
 
 ## Aggiungere o cambiare foto
 
 1. Metti l'immagine in `assets/img/` in **WebP** (qualità ~84). Non ingrandirla oltre la sua risoluzione: le foto attuali sono 828–838 px di larghezza.
-2. Inserisci un `<figure class="ph"><img …></figure>` in `la-palestra.html` (indica sempre `width`/`height` reali e un `alt` descrittivo).
+2. In `la-palestra.html` aggiungi un `<figure class="ph"><img …></figure>` nella riga `.palestra__row` (indica sempre `width`/`height` reali e un `alt` descrittivo). Le foto attuali sono `sala-1…6.webp` (1400 px di larghezza, ricavate dagli originali JPG da ~2700 px caricati dal cliente) e `spogliatoi.webp`.
 3. Le immagini sotto la prima schermata usano `loading="lazy"`; l'hero (`colosseum-04.webp`) no.
-4. `colosseum-07.webp` (sauna) e `colosseum-08.webp` (spogliatoi) sono nella cartella ma non usate: erano solo nella gallery rimossa.
+4. L'immagine `esterno.webp` (1797×401) è il banner del vecchio sito: a schermi più larghi di ~1800 px viene leggermente ingrandita.
 
 Il logo (`logo.png`) è l'originale del sito vecchio (312×103): se hanno una versione vettoriale (SVG) o più grande, sostituiscilo.
 

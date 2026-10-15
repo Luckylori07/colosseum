@@ -31,7 +31,7 @@
   --ink-deep: #070c09;
   --green: #004723;      /* verde del logo, esatto */
   --pop: #ffa63d;        /* ambra: unico accento (CTA, numeri, linee su fondo scuro/verde) */
-  --demo: #f3eee1;       /* usato SOLO dalla barra demo */
+  --demo: #1c2820;       /* usato SOLO dalla barra demo: tono su tono, discreto */
 
   --font-display: "Big Shoulders Display", "Arial Narrow", "Roboto Condensed", Impact, sans-serif;
   --font-text: "Figtree", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -59,12 +59,7 @@
   --line: rgba(255, 255, 255, .3); --card: #003a1d; --focus: #fff;
   --btn-bg: #fff; --btn-fg: var(--green); --btn-hover-bg: var(--pop); --btn-hover-fg: var(--ink);
 }
-.s-white {
-  --bg: #fff; --fg: var(--ink); --muted: #48544c; --accent: var(--green);
-  --line: rgba(11, 18, 14, .2); --card: #f3f4f0; --focus: var(--green);
-  --btn-bg: var(--green); --btn-fg: #fff; --btn-hover-bg: var(--ink); --btn-hover-fg: #fff;
-}
-.s-ink, .s-ink2, .s-green, .s-white { background: var(--bg); color: var(--fg); }
+.s-ink, .s-ink2, .s-green { background: var(--bg); color: var(--fg); }
 
 /* Base ------------------------------------------------------------------- */
 *, *::before, *::after { box-sizing: border-box; }
@@ -85,6 +80,7 @@ h1, h2, h3, p, ul, ol, figure, address { margin: 0; padding: 0; }
 ul, ol { list-style: none; }
 address { font-style: normal; }
 a { color: inherit; }
+a[href^="tel:"] { white-space: nowrap; }
 button { font: inherit; color: inherit; }
 
 :focus-visible { outline: 3px solid var(--focus, var(--pop)); outline-offset: 3px; }
@@ -133,14 +129,15 @@ body[data-demo="on"] .demo-bar { display: block; }
 body[data-demo="on"] .demo-only { display: block; }
 
 .demo-bar {
-  background: var(--demo); color: var(--ink);
-  border-bottom: 1px solid rgba(11, 18, 14, .3);
+  background: var(--demo); color: #c9d4cd;
+  border-bottom: 1px solid rgba(255, 255, 255, .08);
   padding: 5px var(--gutter);
   text-align: center; font-size: .75rem; line-height: 1.35;
 }
-.demo-bar a { font-weight: 700; text-underline-offset: 2px; }
-.demo-bar a:hover { background: var(--ink); color: var(--demo); }
-.demo-bar a:focus-visible { outline-color: var(--ink); }
+.demo-bar strong { color: #fff; font-weight: 600; }
+.demo-bar a { color: #fff; font-weight: 700; text-underline-offset: 2px; }
+.demo-bar a:hover { background: #fff; color: var(--ink); }
+.demo-bar a:focus-visible { outline-color: #fff; }
 
 .header { background: var(--green); color: #fff; border-bottom: 1px solid rgba(255, 255, 255, .22); --focus: #fff; }
 .header .btn--primary { --btn-bg: var(--pop); --btn-fg: var(--ink); --btn-hover-bg: #fff; --btn-hover-fg: var(--green); }
@@ -170,13 +167,10 @@ html:not(.js) .header__burger { display: none; }
 .hero__lede { margin-top: 28px; max-width: 34ch; font-size: 1.1875rem; color: var(--muted); }
 .hero__cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; }
 .hero__photo { position: relative; overflow: hidden; background: var(--green); aspect-ratio: 4 / 3; border-radius: var(--radius); }
-.hero__photo img {
-  width: 100%; height: 100%; object-fit: cover; object-position: 32% center;
-  filter: grayscale(1) contrast(1.08) brightness(.9); mix-blend-mode: luminosity; opacity: .9;
-}
-.hero__photo::after {            /* duotone verde-nero */
+.hero__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 60% center; }
+.hero__photo::after {            /* velo leggero in basso, per leggere l'indicatore */
   content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(180deg, rgba(0, 71, 35, .45) 0%, rgba(7, 12, 9, .78) 100%);
+  background: linear-gradient(180deg, transparent 55%, rgba(7, 12, 9, .55) 100%);
 }
 @keyframes rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
 
@@ -283,9 +277,11 @@ html:not(.js) .header__burger { display: none; }
 .start__cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 40px; }
 
 /* Dove siamo */
-.outside { margin-bottom: 40px; overflow: hidden; border-radius: var(--radius); }
+.pagehead--flush { padding-bottom: clamp(32px, 4vw, 56px); }
+.pagehead--flush .sec__head { margin-bottom: 0; }
+.outside { overflow: hidden; }
 .outside img { width: 100%; aspect-ratio: 2 / 1; object-fit: cover; object-position: 24% 60%; }
-@media (min-width: 640px) { .outside img { aspect-ratio: 16 / 7; object-position: center 60%; } }
+@media (min-width: 640px) { .outside img { aspect-ratio: 3 / 1; object-position: center 60%; } }
 .where { display: grid; gap: 36px; }
 .where__block { display: grid; gap: 14px; align-content: start; justify-items: start; }
 .where__block h2 { font-size: 1.75rem; }
@@ -364,10 +360,10 @@ body { padding-bottom: 60px; }
   background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--pop); border-radius: var(--radius);
   text-decoration: none; transition: background-color .15s, border-color .15s;
 }
-a.hub__item:hover { background: #fff; color: var(--ink); }
-a.hub__item:hover p { color: #33403a; }
+a.hub__item:hover { background: var(--green); border-color: var(--green); border-top-color: var(--pop); color: #fff; }
+a.hub__item:hover p { color: #cfe3d7; }
 .hub__item p a { color: var(--fg); font-weight: 700; text-underline-offset: 3px; }
-.hub__item p a:hover { color: var(--accent); }
+.hub__item p a:hover { color: var(--pop); }
 .hub__item h3 { font-family: var(--font-display); font-weight: 900; text-transform: uppercase; font-size: 2.25rem; line-height: 1; }
 .hub__item p { color: var(--muted); max-width: 34ch; }
 .hub__item:focus-visible { outline-offset: 4px; }
@@ -380,12 +376,12 @@ div.hub__item { align-content: start; }
 .cta p { margin-top: 10px; color: var(--muted); }
 .cta__btns { display: flex; flex-wrap: wrap; gap: 14px; }
 
-/* Foto: scurite e riportate nella palette verde-grafite */
+/* Foto d'archivio (esterno): leggermente scurite e riportate nella palette verde-grafite */
 .tone { position: relative; isolation: isolate; }
-.tone img { filter: saturate(.74) brightness(.76) contrast(1.05); transition: filter .25s ease, transform .35s ease; }
+.tone img { filter: saturate(.88) brightness(.88) contrast(1.03); transition: filter .25s ease, transform .35s ease; }
 .tone::after {
   content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
-  background: linear-gradient(180deg, rgba(0, 71, 35, .22) 0%, rgba(7, 12, 9, .42) 100%);
+  background: linear-gradient(180deg, rgba(0, 71, 35, .12) 0%, rgba(7, 12, 9, .26) 100%);
 }
 
 /* Reveal allo scroll (solo con JS, sobrio) */
