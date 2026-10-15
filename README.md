@@ -52,7 +52,7 @@ Il logo (`logo.png`) è l'originale del sito vecchio (312×103): se hanno una ve
 
 L'unico punto di controllo è l'attributo **`data-demo` sul `<body>`** (in tutte le pagine `.html`).
 
-* `data-demo="on"` (attuale): barra gialla fissa in alto, filigrana "DEMO" diagonale su tutta la pagina, badge "Demo - Tramontis" in basso a sinistra, riga "Proposta di sito realizzata da Tramontis" e nota demo nel footer.
+* `data-demo="on"` (attuale): sottile barra gialla fissa in alto (non chiudibile) e riga "Proposta di sito realizzata da Tramontis" e nota demo nel footer.
 * `data-demo="off"`: tutto questo scompare (CSS) e `main.js` rimuove anche il `noindex` e il prefisso `[DEMO]` dal titolo.
 
 **Per pubblicare la versione definitiva, in una sola mossa:**
@@ -63,7 +63,7 @@ L'unico punto di controllo è l'attributo **`data-demo` sul `<body>`** (in tutte
 
 Lo script (su tutte le pagine `.html`): imposta `data-demo="off"`, elimina `<meta name="robots" content="noindex, nofollow">`, toglie `[DEMO] ` dal `<title>` e sostituisce il dominio (`og:image`, JSON-LD, `robots.txt`, `sitemap.xml`). Senza argomento spegne solo la demo e lascia `https://www.colosseumazzate.it` come dominio.
 
-Se vuoi mantenere un credito all'agenzia dopo la vendita, rimetti nel footer un paragrafo normale (senza classe `demo-only`) con il link a Tramontis; altrimenti puoi cancellare i due `<p class="demo-only">`, la barra `.demo-bar`, il `.demo-badge` e il `.demo-watermark` dall'HTML.
+Se vuoi mantenere un credito all'agenzia dopo la vendita, rimetti nel footer un paragrafo normale (senza classe `demo-only`) con il link a Tramontis; altrimenti puoi cancellare i due `<p class="demo-only">`, la barra `.demo-bar` dall'HTML.
 
 > Nota: finché la demo è attiva il `noindex` è nel codice HTML e i motori di ricerca non indicizzano la pagina. `robots.txt` permette la scansione apposta, altrimenti i crawler non potrebbero leggere il `noindex`.
 >
