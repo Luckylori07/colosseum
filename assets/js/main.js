@@ -121,56 +121,7 @@
   setInterval(renderStatus, 60 * 1000);
 
   /* ---------------------------------------------------------------------
-     4. Lightbox accessibile (dialog nativo: focus intrappolato, ESC chiude, focus restituito)
-     ------------------------------------------------------------------ */
-  var dlg = doc.getElementById('lightbox');
-  var tiles = Array.prototype.slice.call(doc.querySelectorAll('.gallery button[data-full]'));
-  if (dlg && tiles.length && typeof dlg.showModal === 'function') {
-    var lbImg = dlg.querySelector('.lightbox__img');
-    var lbCap = dlg.querySelector('.lightbox__cap');
-    var lbCount = dlg.querySelector('.lightbox__count');
-    var current = 0;
-
-    var show = function (i) {
-      current = (i + tiles.length) % tiles.length;
-      var t = tiles[current];
-      lbImg.src = t.getAttribute('data-full');
-      lbImg.width = parseInt(t.getAttribute('data-w'), 10);
-      lbImg.height = parseInt(t.getAttribute('data-h'), 10);
-      lbImg.alt = t.getAttribute('data-caption');
-      lbCap.textContent = t.getAttribute('data-caption');
-      lbCount.textContent = 'Foto ' + (current + 1) + ' di ' + tiles.length;
-    };
-    var open = function (i) {
-      show(i);
-      dlg.showModal();
-      root.classList.add('no-scroll');
-    };
-
-    tiles.forEach(function (t, i) {
-      t.addEventListener('click', function () { open(i); });
-    });
-    dlg.querySelector('.lightbox__close').addEventListener('click', function () { dlg.close(); });
-    dlg.querySelector('.lightbox__prev').addEventListener('click', function () { show(current - 1); });
-    dlg.querySelector('.lightbox__next').addEventListener('click', function () { show(current + 1); });
-    dlg.addEventListener('close', function () { root.classList.remove('no-scroll'); });
-    dlg.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowLeft') { e.preventDefault(); show(current - 1); }
-      else if (e.key === 'ArrowRight') { e.preventDefault(); show(current + 1); }
-    });
-    // clic sullo sfondo (fuori da immagine e pulsanti) chiude
-    dlg.addEventListener('click', function (e) {
-      if (e.target === dlg || e.target.classList.contains('lightbox__inner')) dlg.close();
-    });
-  } else {
-    // senza <dialog> le foto si aprono come immagini normali
-    tiles.forEach(function (t) {
-      t.addEventListener('click', function () { window.open(t.getAttribute('data-full'), '_blank', 'noopener'); });
-    });
-  }
-
-  /* ---------------------------------------------------------------------
-     5. Reveal sobrio allo scroll (solo gruppi numerati; disattivo con prefers-reduced-motion)
+     4. Reveal sobrio allo scroll (solo gruppi numerati; disattivo con prefers-reduced-motion)
      ------------------------------------------------------------------ */
   var reveals = doc.querySelectorAll('[data-reveal]');
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
