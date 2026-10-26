@@ -1,7 +1,7 @@
 # Colosseum Azzate – proposta di sito (DEMO)
 
 Sito statico multipagina (HTML + CSS + JS, nessun framework, nessuna dipendenza a runtime, nessun cookie, nessun tracking) per la palestra **Colosseum Azzate**, Via 1 Maggio 8, Azzate (VA).
-Proposta realizzata da [Tramontis](https://tramontis.netlify.app/). **È una demo non ancora attiva.**
+Proposta realizzata da Lorenzo Giarnetti. **È una demo non ancora attiva.**
 
 ```
 index.html            Home: hero, "Perché allenarti da noi", indice delle pagine
@@ -51,7 +51,7 @@ Il logo (`logo.png`) è l'originale del sito vecchio (312×103): se hanno una ve
 
 L'unico punto di controllo è l'attributo **`data-demo` sul `<body>`** (in tutte le pagine `.html`).
 
-* `data-demo="on"` (attuale): sottile barra gialla fissa in alto (non chiudibile) e riga "Proposta di sito realizzata da Tramontis" e nota demo nel footer.
+* `data-demo="on"` (attuale): sottile barra fissa in alto (non chiudibile) e riga "Proposta di sito realizzata da Lorenzo Giarnetti" e nota demo nel footer.
 * `data-demo="off"`: tutto questo scompare (CSS) e `main.js` rimuove anche il `noindex` e il prefisso `[DEMO]` dal titolo.
 
 **Per pubblicare la versione definitiva, in una sola mossa:**
@@ -62,7 +62,7 @@ L'unico punto di controllo è l'attributo **`data-demo` sul `<body>`** (in tutte
 
 Lo script (su tutte le pagine `.html`): imposta `data-demo="off"`, elimina `<meta name="robots" content="noindex, nofollow">`, toglie `[DEMO] ` dal `<title>` e sostituisce il dominio (`og:image`, JSON-LD, `robots.txt`, `sitemap.xml`). Senza argomento spegne solo la demo e lascia `https://www.colosseumazzate.it` come dominio.
 
-Se vuoi mantenere un credito all'agenzia dopo la vendita, rimetti nel footer un paragrafo normale (senza classe `demo-only`) con il link a Tramontis; altrimenti puoi cancellare i due `<p class="demo-only">`, la barra `.demo-bar` dall'HTML.
+Se vuoi mantenere un credito dopo la vendita, rimetti nel footer un paragrafo normale (senza classe `demo-only`) con il tuo nome; altrimenti puoi cancellare i due `<p class="demo-only">`, la barra `.demo-bar` dall'HTML.
 
 > Nota: finché la demo è attiva il `noindex` è nel codice HTML e i motori di ricerca non indicizzano la pagina. `robots.txt` permette la scansione apposta, altrimenti i crawler non potrebbero leggere il `noindex`.
 >

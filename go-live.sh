@@ -3,7 +3,7 @@
 #   ./go-live.sh                      -> spegne la demo
 #   ./go-live.sh https://dominio.it   -> spegne la demo e imposta il dominio definitivo
 # Cosa fa, in tutte le pagine .html:
-#   1. data-demo="on"  ->  data-demo="off"  (nasconde barra e righe "Tramontis"/demo)
+#   1. data-demo="on"  ->  data-demo="off"  (nasconde barra e righe di credito/demo)
 #   2. toglie <meta name="robots" content="noindex, nofollow">
 #   3. toglie il prefisso "[DEMO] " dal <title>
 #   4. (opzionale) sostituisce https://www.colosseumazzate.it con il dominio indicato
