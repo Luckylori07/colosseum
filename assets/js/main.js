@@ -121,7 +121,45 @@
   setInterval(renderStatus, 60 * 1000);
 
   /* ---------------------------------------------------------------------
-     4. Reveal sobrio allo scroll (solo gruppi numerati; disattivo con prefers-reduced-motion)
+     4. Presentazione foto nell'hero (cambio ogni ~3,5 s; pausa con il pulsante, al passaggio del mouse o a scheda nascosta)
+     ------------------------------------------------------------------ */
+  var slides = doc.querySelectorAll('.hero__slides img');
+  var pauseBtn = doc.querySelector('.hero__pause');
+  var motionOff = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (slides.length > 1 && !motionOff) {
+    var cur = 0, timer = null, userPaused = false, hovering = false;
+    Array.prototype.forEach.call(slides, function (im, i) { im.setAttribute('aria-hidden', i === 0 ? 'false' : 'true'); });
+    var go = function () {
+      slides[cur].classList.remove('is-active'); slides[cur].setAttribute('aria-hidden', 'true');
+      cur = (cur + 1) % slides.length;
+      slides[cur].classList.add('is-active'); slides[cur].setAttribute('aria-hidden', 'false');
+    };
+    var sync = function () {
+      var shouldRun = !userPaused && !hovering && !doc.hidden;
+      if (shouldRun && !timer) timer = setInterval(go, 3500);
+      if (!shouldRun && timer) { clearInterval(timer); timer = null; }
+    };
+    var figure = doc.querySelector('.hero__photo');
+    if (figure) {
+      figure.addEventListener('mouseenter', function () { hovering = true; sync(); });
+      figure.addEventListener('mouseleave', function () { hovering = false; sync(); });
+    }
+    doc.addEventListener('visibilitychange', sync);
+    if (pauseBtn) {
+      pauseBtn.addEventListener('click', function () {
+        userPaused = !userPaused;
+        pauseBtn.setAttribute('aria-pressed', userPaused ? 'true' : 'false');
+        pauseBtn.setAttribute('aria-label', userPaused ? 'Riprendi la presentazione delle foto' : 'Metti in pausa la presentazione delle foto');
+        sync();
+      });
+    }
+    sync();
+  } else if (pauseBtn) {
+    pauseBtn.parentNode.removeChild(pauseBtn);
+  }
+
+  /* ---------------------------------------------------------------------
+     5. Reveal sobrio allo scroll (solo gruppi numerati; disattivo con prefers-reduced-motion)
      ------------------------------------------------------------------ */
   var reveals = doc.querySelectorAll('[data-reveal]');
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
