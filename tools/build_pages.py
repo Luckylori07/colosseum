@@ -55,7 +55,7 @@ def head(p):
     og_title = p.get("og_title", t)
     extra = ""
     if p["file"] == "index.html":
-        extra += '<link rel="preload" href="assets/img/sala-1.webp" as="image" type="image/webp">\n'
+        extra += '<link rel="preload" href="assets/img/sala-4.webp" as="image" type="image/webp">\n'
         extra += '<script type="application/ld+json">\n'+JSONLD+'\n</script>\n'
     return f'''<!DOCTYPE html>
 <html lang="it">
@@ -232,7 +232,7 @@ home["body"] = f'''
         </div>
       </div>
       <figure class="hero__photo">
-        <img src="assets/img/sala-1.webp" width="1400" height="934" alt="La sala pesi: il rack dei manubri, le panche e la parete a specchio con la fascia verde">
+        <img src="assets/img/sala-4.webp" width="1400" height="934" alt="La sala fitness di Colosseum Azzate: macchinari isotonici sul parquet, con le pareti verdi e le grandi vetrate">
         <div class="status status--on-photo" data-status>
           <span class="status__dot" aria-hidden="true"></span>
           <span class="status__text"><strong data-status-label>Orari di apertura</strong><span data-status-detail>Lun-Ven 7:00-22:00</span></span>
@@ -293,9 +293,9 @@ pal = {"file":"la-palestra.html","title":"La palestra – Colosseum Azzate",
        "desc":"La sala fitness di Colosseum Azzate: area pesi con rack, panche e manubri, macchine isotoniche, saletta per il corpo libero, spogliatoi con docce calde. Aperti 365 giorni l'anno."}
 pal["body"] = page_head("Una sala ampia e luminosa.") + f'''      <div class="palestra">
         <div class="palestra__text">
-          <p>Un'<strong>area pesi</strong> ben fornita: <strong>rack</strong> per i pesi liberi, <strong>panche</strong>, <strong>bilancieri e dischi</strong>, una lunga fila di <strong>manubri</strong> e <strong>macchine isotoniche</strong> per ogni gruppo muscolare. Attrezzi di impostazione classica, robusti e affidabili, con <strong>prese e corde</strong> per tanti esercizi diversi.</p>
-          <p>C'è anche una <strong>saletta tranquilla</strong> per il <strong>corpo libero</strong>, con tappeti e attrezzi, e uno staff sempre disponibile per <strong>consigli e spiegazioni</strong> sugli esercizi.</p>
-          <p>Dopo l'allenamento ti aspettano <strong>spogliatoi curati</strong> con <strong>armadietti a chiusura automatica</strong>, senza bisogno del lucchetto, e <strong>docce calde</strong>.</p>
+          <p>Un'<strong>area pesi</strong> ben fornita: rack per i pesi, panche, bilancieri e dischi, manubri e un'ampia selezione di <strong>macchine isotoniche</strong> per ogni gruppo muscolare. Attrezzi di alta qualità, robusti e affidabili, con prese e corde per esercizi diversi.</p>
+          <p>Diversi macchinari per il <strong>cardio</strong> e una <strong>saletta dedicata per il corpo libero</strong>, con tappetini e attrezzi. Gli istruttori sono sempre a tua disposizione per consigli e spiegazioni sugli esercizi. </p>
+          <p>Dopo l'allenamento ti aspettano spogliatoi con armadietti a chiusura automatica e docce calde.</p>
         </div>
         <figure class="ph"><img src="assets/img/sala-1.webp" width="1400" height="934" alt="La sala pesi: il rack dei manubri, le panche e la parete a specchio con la fascia verde"></figure>
       </div>
