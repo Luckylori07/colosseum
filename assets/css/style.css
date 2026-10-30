@@ -334,17 +334,6 @@ html:not(.js) .header__burger { display: none; }
 .footer__legal:empty { display: none; }
 .footer__legal a { font-weight: 700; }
 
-/* Barra "Chiama" fissa su mobile */
-.callbar {
-  position: fixed; left: 0; right: 0; bottom: 0; z-index: 1250;
-  display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 46px;
-  background: var(--pop); color: var(--ink); font-weight: 800; font-size: .9375rem; text-decoration: none;
-  border-top: 2px solid var(--ink-deep);
-}
-.callbar .ico { width: 1.1em; height: 1.1em; }
-.callbar:hover { background: #fff; }
-.callbar:focus-visible { outline-color: var(--ink); outline-offset: -6px; }
-body { padding-bottom: 46px; }
 
 /* Lightbox --------------------------------------------------------------- */
 /* Privacy ---------------------------------------------------------------- */
@@ -412,8 +401,6 @@ div.hub__item { align-content: start; }
 }
 
 @media (min-width: 960px) {
-  body { padding-bottom: 0; }
-  .callbar { display: none; }
   .demo-bar { font-size: .8125rem; }
   .header__row { gap: 28px; min-height: 76px; }
   .header__logo img { height: 52px; }
