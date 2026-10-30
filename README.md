@@ -5,7 +5,7 @@ Proposta realizzata da Lorenzo Giarnetti. **È una demo non ancora attiva.**
 
 ```
 index.html            Home: hero, "Perché allenarti da noi", indice delle pagine
-la-palestra.html      La palestra (testo, foto, corsi)
+la-palestra.html      La palestra (testo e foto)
 abbonamenti.html      Abbonamenti e ingressi
 orari.html            Orari e indicatore "Aperto ora"
 come-iniziare.html    Come iniziare (3 passi)
@@ -32,8 +32,7 @@ Header, footer e barra DEMO sono **ripetuti identici in ogni pagina** (nessun bu
 | Indirizzo, P.IVA | `dove-siamo.html`, footer di ogni pagina, `privacy.html`, JSON-LD in `<head>` di `index.html` |
 | Orari (testo) | `orari.html`, `faq.html`, footer, JSON-LD (`openingHoursSpecification`) |
 | Orari (indicatore "Aperto ora") | oggetto `SCHEDULE` in `assets/js/main.js` (minuti dalla mezzanotte, `0` = domenica) |
-| **Prezzi** | in `abbonamenti.html` cerca `data-price-slot`: sostituisci "Chiedi il prezzo in reception" con la cifra. Per gli ingressi, aggiungi il prezzo nel blocco `.entries__list` |
-| **Corsi** | blocco `.corsi` in `la-palestra.html` e FAQ "Ci sono corsi?": ora dice "Chiedi in reception i corsi attivi" |
+| **Prezzi** | in `abbonamenti.html`, righe `.prices__row` (listino per durata) e `.entries__price` (ingressi). Il Full-time 12 mesi è 330 €; i placeholder `€ ––` hanno l'attributo `data-price-slot`: sostituisci l'intero `<dd class="prices__tbd" …>` con `<dd class="prices__set"><span class="amt">NNN</span><span class="cur"> €</span></dd>` (per gli ingressi basta scrivere il prezzo nello `<span class="entries__price">`). Aggiorna anche la FAQ "Quanto costa?" |
 | Social | Instagram `instagram.com/colosseum_azzate` e Facebook `facebook.com/colosseumazzate`: cerca `instagram.com` e `facebook.com` nei file `.html` (footer, home, `dove-siamo.html`, `come-iniziare.html`, `faq.html`, JSON-LD `sameAs`) |
 | Colori | variabili in `:root` di `style.css`. Sfondo scuro (`--ink`, `--ink-2`); `--green: #004723` è il verde del logo (header, footer, fasce, hover delle card); `--pop: #ffa63d` è l'unico accento (ambra) |
 | Filtro sulle foto | solo la foto dell'esterno in `dove-siamo.html` usa la classe `.tone` (leggera scurita + velo verde-grafite); le foto della sala sono senza filtro |
