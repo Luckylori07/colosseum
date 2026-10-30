@@ -23,13 +23,10 @@
   function setTopHeight() {
     if (top) root.style.setProperty('--top-h', top.offsetHeight + 'px');
   }
-  setTopHeight();
+  window.requestAnimationFrame(setTopHeight);
   window.addEventListener('resize', setTopHeight);
   if (window.ResizeObserver && top) new ResizeObserver(setTopHeight).observe(top);
 
-  var style = doc.createElement('style');
-  style.textContent = '[id]{scroll-margin-top:calc(var(--top-h) + 8px)}';
-  doc.head.appendChild(style);
 
   /* ---------------------------------------------------------------------
      2. Menu mobile

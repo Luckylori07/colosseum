@@ -16,7 +16,9 @@ assets/css/style.css  stile (colori e font in :root / @font-face)
 assets/js/main.js     menu mobile, "Aperto ora", reveal
 assets/img/           logo, foto (WebP), favicon, og-image
 assets/fonts/         Big Shoulders Display e Figtree (OFL), self-hosted
-robots.txt  sitemap.xml  .nojekyll  go-live.sh
+robots.txt  sitemap.xml  .nojekyll  go-live.sh  make-dist.sh
+web.config  _headers  _redirects   configurazione server (IIS / Netlify)
+tools/build_pages.py   genera le pagine (header/footer condivisi): vedi nota nello script
 ```
 
 Per vederlo in locale: `python3 -m http.server 8000` nella cartella, poi <http://localhost:8000>.
@@ -71,9 +73,29 @@ Se vuoi mantenere un credito dopo la vendita, rimetti nel footer un paragrafo no
 
 Sono solo file statici, con percorsi relativi:
 
-* **GitHub Pages**: Settings → Pages → Deploy from a branch → `main` / root (c'è già `.nojekyll`).
-* **Netlify / Cloudflare Pages / qualunque hosting**: carica la cartella così com'è (nessuna build). Con Netlify: "publish directory" = `.`, nessun build command.
-* Hosting tradizionale (FTP): copia tutti i file nella root del dominio.
+* **Demo su GitHub Pages**: Settings → Pages → Deploy from a branch → `main` / root (c'è già `.nojekyll`). Attenzione: così vengono pubblicati anche `README.md`, `tools/`, `.claude/` ecc.; per il sito definitivo usa sempre `dist/` (vedi sotto).
+* **Netlify / Cloudflare Pages**: "publish directory" = `dist` dopo `./make-dist.sh`, nessun build command.
+* **Hosting tradizionale (FTP/SFTP)**: carica il contenuto di `dist/` nella root del dominio.
+
+
+## Pubblicazione sul dominio del cliente (colosseumazzate.it)
+
+Il sito attuale gira su **hosting Windows Aruba (IIS 10 / ASP.NET)**: per questo c'è un `web.config` (HTTPS e www obbligatori, redirect dei vecchi URL, header di sicurezza, MIME di `.webp` e `.woff2`, pagina 404). Passi:
+
+1. Compila i dati mancanti (prezzi, REA/capitale sociale nel footer, vedi sotto) e verifica i claim con il cliente.
+2. `./go-live.sh https://www.colosseumazzate.it` (si ferma se restano segnaposto; `--force` per ignorarli).
+3. `./make-dist.sh` crea `dist/` e `dist.zip` con **solo** i file da pubblicare (niente README, script, `.git`, `.claude`).
+4. Carica il contenuto di `dist/` in FTP/SFTP nella root del sito, **dopo aver fatto un backup** del sito attuale, e cancella i vecchi file (`fitness.html`, `images/`, `Imgs/`, `js/`, `style.css` ecc.): i vecchi URL sono già reindirizzati.
+5. Controlla con `curl -I https://www.colosseumazzate.it` gli header (CSP, HSTS), prova `http://` e il dominio senza www, apri una pagina inesistente (deve mostrare la 404).
+6. Su Netlify/Cloudflare Pages valgono invece `_headers` e `_redirects` (stesse regole).
+
+### Da completare/verificare prima della pubblicazione
+* **Dati societari nel footer** (art. 2250 c.c. e art. 7 D.Lgs. 70/2003): Registro Imprese di Varese, numero REA, capitale sociale (i.v.), eventuale socio unico/liquidazione. Da visura camerale; poi cancella il commento `TODO-LEGALE` nel footer di **tutte** le pagine (e in `tools/build_pages.py`, se lo usi).
+* **Prezzi**: sono quelli ai consumatori, quindi vanno indicati **IVA inclusa**; aggiungi la dicitura quando il cliente conferma.
+* **Claim pubblicitari** da poter dimostrare: "365 giorni l'anno" (anche Natale, Capodanno, Ferragosto), "istruttori professionisti", "docce calde", "armadietti a chiusura automatica", saletta corpo libero.
+* **Foto**: confermare che il cliente (o il fotografo) abbia i diritti e che le persone riconoscibili abbiano dato il consenso.
+* **Privacy**: far revisionare l'informativa al titolare/consulente; indicare il fornitore di hosting se tratta log.
+* **DNS/posta** (consigliato): DMARC da `p=none` a `p=quarantine` dopo un periodo di monitoraggio, SPF da `~all` a `-all`, record CAA, controllo DKIM; il certificato wildcard Actalis scade il 30/01/2027.
 
 ## Note tecniche
 

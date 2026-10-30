@@ -80,6 +80,8 @@ h1, h2, h3, p, ul, ol, figure, address { margin: 0; padding: 0; }
 ul, ol { list-style: none; }
 address { font-style: normal; }
 a { color: inherit; }
+.sprite { position: absolute; width: 0; height: 0; }
+[id] { scroll-margin-top: calc(var(--top-h) + 8px); }
 a[href^="tel:"] { white-space: nowrap; }
 button { font: inherit; color: inherit; }
 
@@ -167,6 +169,9 @@ html:not(.js) .header__burger { display: none; }
 .hero__grid { display: grid; gap: 40px; align-items: center; }
 .hero__title { font-size: clamp(4.25rem, 21vw, 7.5rem); line-height: .86; }
 .hero__title span { white-space: nowrap; }
+.hero__title span:nth-child(1) { --i: 0; }
+.hero__title span:nth-child(2) { --i: 1; }
+.hero__title span:nth-child(3) { --i: 2; }
 .hero__title span { display: block; animation: rise .8s cubic-bezier(.2, .7, .2, 1) both; animation-delay: calc(var(--i) * 110ms); }
 .hero__lede { margin-top: 28px; max-width: 34ch; font-size: 1.1875rem; color: var(--muted); }
 .hero__cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; }

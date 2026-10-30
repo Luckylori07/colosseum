@@ -3,16 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script>document.documentElement.className += ' js';</script>
+<script src="assets/js/init.js"></script>
 <title>[DEMO] Abbonamenti – Colosseum Azzate</title>
 <meta name="description" content="Abbonamenti Full-time e Part-time da 1, 3, 6 o 12 mesi (Full-time 12 mesi: 330 €), ingresso singolo e pacchetti da 10, 20 e 50 ingressi.">
 <!-- DEMO: rimuovere con go-live.sh (vedi README) -->
 <meta name="robots" content="noindex, nofollow" id="demo-robots">
+<link rel="canonical" href="https://www.colosseumazzate.it/abbonamenti.html">
 <meta name="theme-color" content="#004723">
 
 <meta property="og:type" content="website">
 <meta property="og:locale" content="it_IT">
 <meta property="og:site_name" content="Colosseum Azzate">
+<meta property="og:url" content="https://www.colosseumazzate.it/abbonamenti.html">
 <meta property="og:title" content="Abbonamenti – Colosseum Azzate">
 <meta property="og:description" content="Abbonamenti Full-time e Part-time da 1, 3, 6 o 12 mesi (Full-time 12 mesi: 330 €), ingresso singolo e pacchetti da 10, 20 e 50 ingressi.">
 <meta property="og:image" content="https://www.colosseumazzate.it/assets/img/og-image.jpg">
@@ -32,7 +34,7 @@
 <!-- DEMO: unico punto di controllo = attributo data-demo del body (on: demo visibile; off: sito definitivo). Vedi README. -->
 <body data-demo="on" id="top">
 
-<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+<svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
   <defs>
     <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
     <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
@@ -86,34 +88,34 @@
       </div>
       <div class="plans">
         <article class="plan">
-          <div class="plan__media"><img src="assets/img/sala-5.webp" width="1400" height="934" loading="lazy" alt="Le macchine isotoniche della sala fitness, con le colonne verdi e le finestre"></div>
+          <div class="plan__media"><img src="assets/img/sala-5.webp" srcset="assets/img/sala-5-800.webp 800w, assets/img/sala-5.webp 1400w" sizes="(min-width: 960px) 570px, 100vw" width="1400" height="934" alt="Le macchine isotoniche della sala fitness, con le colonne verdi e le finestre"></div>
           <div class="plan__body">
             <h2 class="plan__name">Full-time</h2>
             <p class="plan__desc">Accesso libero alla sala fitness, senza vincoli di orario.</p>
-            <dl class="prices" aria-label="Prezzi Full-time">
+            <div role="group" aria-label="Prezzi Full-time"><dl class="prices">
               <div class="prices__row"><dt>1 mese</dt><dd class="prices__tbd" data-price-slot><span aria-hidden="true">€ ––</span><span class="sr-only">prezzo in definizione</span></dd></div>
               <div class="prices__row"><dt>3 mesi</dt><dd class="prices__tbd" data-price-slot><span aria-hidden="true">€ ––</span><span class="sr-only">prezzo in definizione</span></dd></div>
               <div class="prices__row"><dt>6 mesi</dt><dd class="prices__tbd" data-price-slot><span aria-hidden="true">€ ––</span><span class="sr-only">prezzo in definizione</span></dd></div>
               <div class="prices__row"><dt>12 mesi</dt><dd class="prices__set"><span class="amt">330</span><span class="cur"> €</span></dd></div>
-            </dl>
+            </dl></div>
             <div class="plan__price">
-              <a class="btn btn--primary" href="tel:+390332457667"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg>Chiama 0332 457667</a>
+              <a class="btn btn--primary" href="tel:+390332457667"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg>Chiama 0332&nbsp;457667</a>
             </div>
           </div>
         </article>
         <article class="plan">
-          <div class="plan__media"><img src="assets/img/sala-3.webp" width="1400" height="934" loading="lazy" alt="Macchinari per la forza sul parquet, illuminati dalla luce delle finestre"></div>
+          <div class="plan__media"><img src="assets/img/sala-3.webp" srcset="assets/img/sala-3-800.webp 800w, assets/img/sala-3.webp 1400w" sizes="(min-width: 960px) 570px, 100vw" width="1400" height="934" alt="Macchinari per la forza sul parquet, illuminati dalla luce delle finestre"></div>
           <div class="plan__body">
             <h2 class="plan__name">Part-time</h2>
             <p class="plan__desc">Fascia ridotta: accesso alla sala fitness dalle 9:00 alle 15:30.</p>
-            <dl class="prices" aria-label="Prezzi Part-time">
+            <div role="group" aria-label="Prezzi Part-time"><dl class="prices">
               <div class="prices__row"><dt>1 mese</dt><dd class="prices__tbd" data-price-slot><span aria-hidden="true">€ ––</span><span class="sr-only">prezzo in definizione</span></dd></div>
               <div class="prices__row"><dt>3 mesi</dt><dd class="prices__tbd" data-price-slot><span aria-hidden="true">€ ––</span><span class="sr-only">prezzo in definizione</span></dd></div>
               <div class="prices__row"><dt>6 mesi</dt><dd class="prices__tbd" data-price-slot><span aria-hidden="true">€ ––</span><span class="sr-only">prezzo in definizione</span></dd></div>
               <div class="prices__row"><dt>12 mesi</dt><dd class="prices__tbd" data-price-slot><span aria-hidden="true">€ ––</span><span class="sr-only">prezzo in definizione</span></dd></div>
-            </dl>
+            </dl></div>
             <div class="plan__price">
-              <a class="btn btn--primary" href="tel:+390332457667"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg>Chiama 0332 457667</a>
+              <a class="btn btn--primary" href="tel:+390332457667"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg>Chiama 0332&nbsp;457667</a>
             </div>
           </div>
         </article>
@@ -141,7 +143,7 @@
         <p>Chiamaci o passa in reception per scegliere l'abbonamento giusto.</p>
       </div>
       <div class="cta__btns">
-        <a class="btn btn--primary btn--lg" href="tel:+390332457667"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg>Chiama 0332 457667</a>
+        <a class="btn btn--primary btn--lg" href="tel:+390332457667"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg>Chiama 0332&nbsp;457667</a>
         <a class="btn btn--ghost btn--lg" href="dove-siamo.html">Come arrivare</a>
       </div>
     </div>
@@ -170,7 +172,7 @@
       <div>
         <h2 class="footer__h">Contatti e orari</h2>
         <ul>
-          <li><a href="tel:+390332457667">0332 457667</a></li>
+          <li><a href="tel:+390332457667">0332&nbsp;457667</a></li>
           <li><a href="mailto:club@colosseumazzate.it?subject=Richiesta%20informazioni">club@colosseumazzate.it</a></li>
           <li><a href="https://www.instagram.com/colosseum_azzate/" target="_blank" rel="noopener noreferrer"><svg class="ico" aria-hidden="true"><use href="#i-instagram"/></svg>Instagram</a></li>
           <li><a href="https://www.facebook.com/colosseumazzate/?locale=it_IT" target="_blank" rel="noopener noreferrer"><svg class="ico" aria-hidden="true"><use href="#i-facebook"/></svg>Facebook</a></li>
@@ -185,6 +187,7 @@
           <li>Colosseum s.r.l.</li>
           <li>Via 1 Maggio 8, 21022 Azzate (VA)</li>
           <li>P.IVA 03154860120</li>
+          <!-- TODO-LEGALE: aggiungere da visura camerale: Registro Imprese di Varese, n. REA, capitale sociale (i.v.), eventuale socio unico / stato di liquidazione (art. 2250 c.c.; art. 7 D.Lgs. 70/2003). go-live.sh si ferma finché questo commento è presente. -->
           <li><a href="privacy.html">Informativa sulla privacy</a></li>
         </ul>
       </div>

@@ -1,0 +1,7 @@
+# Vecchi URL del sito 2021 (Netlify / Cloudflare Pages)
+/fitness.html            /la-palestra.html   301
+/gallery.html            /la-palestra.html   301
+/altre*                  /la-palestra.html   301
+/abbonamenti*2021.html   /abbonamenti.html   301
+/dove_siamo.html         /dove-siamo.html    301
+/index*2021.html         /                   301
