@@ -245,6 +245,7 @@ html:not(.js) .header__burger { display: none; }
 /* La palestra */
 .palestra { display: grid; gap: 40px; align-items: start; }
 .palestra__text { display: grid; gap: 20px; align-content: start; }
+.palestra__text strong { color: #fff; font-weight: 700; }
 .palestra__text p { max-width: 52ch; font-size: 1.25rem; line-height: 1.65; color: var(--muted); }
 .palestra__row { display: grid; gap: 12px; margin-top: 12px; }
 .ph { overflow: hidden; border-radius: var(--radius); background: var(--card); }
